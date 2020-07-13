@@ -2,6 +2,7 @@ let mage;
 let scenarioFar;
 let scenarioBack;
 let scenarioFront;
+
 let mageBullet;
 let mageFlame;
 
@@ -9,13 +10,17 @@ let blueMinion;
 
 let powerup;
 
+let hit;
+
+let evolve;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(15);
 
   scenarioFar = new Scenario(scenarioFarImg, 1);
-  scenarioBack = new Scenario(scenarioBackImg, 2);
-  scenarioFront = new Scenario(scenarioFrontImg, 4);
+  scenarioBack = new Scenario(scenarioBackImg, 3);
+  scenarioFront = new Scenario(scenarioFrontImg, 6);
 
   mage = new Character(
     mageImg,
@@ -46,7 +51,7 @@ function setup() {
     90, 132,
     45, 66,
     3, 2,
-    50, height - 80
+    50, height - 132
   )
 
   powerup = new PowerUp(
@@ -55,6 +60,22 @@ function setup() {
     128, 126,
     4, 4,
     50, height - 40
+  )
+
+  hit = new Effect(
+    minionHitImg,
+    128, 128,
+    128, 128,
+    8, 8,
+    50, height - 80
+  )
+
+  evolve = new Effect(
+    evolutionImg,
+    140, 134,
+    14, 67,
+    8, 4,
+    50, height - 80
   )
 }
 
@@ -91,11 +112,17 @@ function draw() {
   scenarioFront.show();
   scenarioFront.move();
 
-  blueMinion.show();
-  blueMinion.move();
-
+  //CHARACTER
   mage.show();
   mage.applyGravity();
+
+  //MINION SPAW
+  if (!blueMinion.dead) {
+    blueMinion.show();
+    blueMinion.move();
+  } else {
+    blueMinion.spawn();
+  }
 
   powerup.show();
   powerup.move();
@@ -111,45 +138,50 @@ function draw() {
 
   //POWERUP COLLISION
   if (mage.getsPower(powerup)) {
-    if (mage.evolution2) {
-      //gets life
-      return 0;
-    }
-    if (mage.evolution1) {
-      mage.evolve2();
-      mage.isInvencible();
-      return 0;
-    }
+    // if (mage.evolution2) {
+    //   return 0;
+    // }
+    // if (mage.evolution1) {
+    //   mage.evolve2();
+    //   return 0;
+    // }
     mage.evolve1();
-    mage.isInvencible();
   }
 
   //MINION COLLISION
   if (mage.collides(blueMinion)) {
     if (mage.evolution2) {
       mage.evolve1();
-      mage.isInvencible();
+      mage.isInvencible(800);
       return 0;
     }
     if (mage.evolution1) {
       mage.evolve0();
-      mage.isInvencible();
+      mage.isInvencible(800);
       return 0;
     }
     //mage dies
-    mage.isInvencible();
+    mage.isInvencible(800);
   }
 
   //PROJECTILE COLLISION
   if (mageFlame.collides(blueMinion)) {
     console.log("HIT!");
-    //enemy dies
-    //projectile vanishes
+    blueMinion.death();
   }
 
   if (mageBullet.collides(blueMinion)) {
     console.log("HIT!");
-    //enemy dies
+    blueMinion.death();
+  }
+
+  //COLLISION EFFECTS
+  if (blueMinion.dead) {
+    hit.show(blueMinion.xPos - 20, blueMinion.yPos);
+  }
+
+  if (mage.evolving) {
+    evolve.show(mage.xPos, mage.yPos);
   }
 }
 

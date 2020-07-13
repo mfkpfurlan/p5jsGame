@@ -16,6 +16,7 @@ class Character extends Animate {
             currentFrame, maxFrame
         )
         this.invencible = false;
+        this.evolving = false;
         this.evolution0 = true;
         this.evolution1 = false;
         this.evolution2 = false;
@@ -23,7 +24,7 @@ class Character extends Animate {
         this.jumps = 0;
         this.jumpSpeed = 0;
         this.jumpHeight = -50;
-        this.yFloor = height - this.ySize - 10;
+        this.yFloor = height - this.xSize - 20;
     }
 
     jump() {
@@ -44,20 +45,25 @@ class Character extends Animate {
     }
 
     evolve0() {
-        this.spriteSheet = loadImage('assets/characters/mage-1-85x94.png');
+        this.spriteSheet = mageImg;
         this.xSize = 85;
         this.ySize = 94;
         this.xSprite = 85;
         this.ySprite = 94;
-        this.xFrames = 3;
+        this.xFrames = 4;
         this.yFrames = 2;
         this.yPos = height - this.ySize;
         this.evolution0 = true;
         this.evolution1 = false;
+        this.evolving = true;
+
+        setTimeout(() => {
+            this.evolving = false;
+        }, 3000);
     }
 
     evolve1() {
-        this.spriteSheet = loadImage('assets/characters/mage-2-122x110.png');
+        this.spriteSheet = mageImg2;
         this.xSize = 122;
         this.ySize = 110;
         this.xSprite = 122;
@@ -67,10 +73,15 @@ class Character extends Animate {
         this.yPos = height - this.ySize;
         this.evolution0 = false;
         this.evolution1 = true;
+        mage.isInvencible(800);
+        this.evolving = true;
+        setTimeout(() => {
+            this.evolving = false;
+        }, 2000);
     }
 
     evolve2() {
-        this.spriteSheet = loadImage('assets/characters/mage-3-87x110.png');
+        this.spriteSheet = mageImg3;
         this.xSize = 87;
         this.ySize = 110;
         this.xSprite = 87;
@@ -82,11 +93,11 @@ class Character extends Animate {
         this.evolution1 = false;
     }
 
-    isInvencible() {
+    isInvencible(time) {
         this.invencible = true;
         setTimeout(() => {
             this.invencible = false;
-        }, 800)
+        }, time)
     }
 
     getsPower(powerup) {

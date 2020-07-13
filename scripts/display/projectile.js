@@ -15,7 +15,7 @@ class Projectile extends Animate {
             xPos, yPos,
             currentFrame, maxFrame
         )
-        this.speed = 10;
+        this.speed = 30;
         this.shooting = false;
     }
 

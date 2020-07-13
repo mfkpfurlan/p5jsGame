@@ -1,5 +1,7 @@
 function preload() {
     mageImg = loadImage('assets/characters/mage-1-85x94.png');
+    mageImg2 = loadImage('assets/characters/mage-2-122x110.png')
+    mageImg3 = loadImage('assets/characters/mage-3-87x110.png');
 
     scenarioFarImg = loadImage('assets/background/far-buildings.png');
     scenarioBackImg = loadImage('assets/background/back-buildings.png');
@@ -11,4 +13,8 @@ function preload() {
     blueMinionImg = loadImage('assets/monsters/minion-45x66.png');
 
     powerUp1Img = loadImage('assets/powers/shockwave_fire.png');
+
+    minionHitImg = loadImage('assets/effects/minion-hit.png');
+
+    evolutionImg = loadImage('assets/effects/evolution-effect.png');
 }

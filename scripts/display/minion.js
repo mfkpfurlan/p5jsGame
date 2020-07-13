@@ -15,18 +15,24 @@ class Minion extends Animate {
             xPos, yPos,
             currentFrame, maxFrame
         )
-        this.speed = 10;
+        this.speed = 5;
         this.xPos = width;
+        this.dead = false;
     }
 
     move() {
         this.xPos -= this.speed;
-        if (this.xPos < 0) {
-            this.spawn();
-        }
     }
 
     spawn() {
-        this.xPos = width;
+        setTimeout(() => {
+            this.dead = false;
+            this.xPos = width;
+        }, 3000);
+    }
+
+    death() {
+        this.dead = true;
+        this.spawn();
     }
 }
