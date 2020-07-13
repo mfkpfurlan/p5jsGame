@@ -21,12 +21,11 @@ class PowerUp extends Animate {
 
     move() {
         this.xPos -= this.speed;
-        if (this.xPos < 0) {
-            this.spawn();
-        }
     }
 
     spawn() {
-        this.xPos = width;
+        setTimeout(() => {
+            this.xPos = width;
+        }, 3000);
     }
 }

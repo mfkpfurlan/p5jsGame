@@ -15,9 +15,17 @@ class Minion extends Animate {
             xPos, yPos,
             currentFrame, maxFrame
         )
-        this.speed = 5;
+        this.speed = 15;
         this.xPos = width;
         this.dead = false;
+        this.invencible = false;
+    }
+
+    isInvencible(time) {
+        this.invencible = true;
+        setTimeout(() => {
+            this.invencible = false;
+        }, time)
     }
 
     move() {
@@ -28,11 +36,13 @@ class Minion extends Animate {
         setTimeout(() => {
             this.dead = false;
             this.xPos = width;
+            this.invencible = false;
         }, 3000);
     }
 
     death() {
         this.dead = true;
+        this.invencible = true;
         this.spawn();
     }
 }

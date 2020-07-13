@@ -74,7 +74,7 @@ function setup() {
     evolutionImg,
     140, 134,
     14, 67,
-    8, 4,
+    8, 3,
     50, height - 80
   )
 }
@@ -93,7 +93,6 @@ function keyPressed() {
         mageFlame.shooting = true;
         return 0;
       }
-      return 0;
     }
     if (!mageBullet.shooting) {
       mageBullet.yPos = mage.yPos;
@@ -124,8 +123,13 @@ function draw() {
     blueMinion.spawn();
   }
 
-  powerup.show();
-  powerup.move();
+  if (mage.evolution1 === false) {
+    powerup.show();
+    powerup.move();
+  } else {
+    powerup.spawn();
+  }
+
 
   //PROJECTILES
   if (mageBullet.shooting) {
@@ -136,43 +140,39 @@ function draw() {
     mageFlame.shoot();
   }
 
-  //POWERUP COLLISION
+  //MAGE POWERUP COLLISION
   if (mage.getsPower(powerup)) {
-    // if (mage.evolution2) {
-    //   return 0;
-    // }
-    // if (mage.evolution1) {
-    //   mage.evolve2();
-    //   return 0;
-    // }
     mage.evolve1();
   }
 
-  //MINION COLLISION
+  //MAGE MINION COLLISION
   if (mage.collides(blueMinion)) {
-    if (mage.evolution2) {
-      mage.evolve1();
-      mage.isInvencible(800);
-      return 0;
-    }
     if (mage.evolution1) {
       mage.evolve0();
+      blueMinion.death();
       mage.isInvencible(800);
       return 0;
     }
     //mage dies
+    blueMinion.death();
     mage.isInvencible(800);
   }
 
-  //PROJECTILE COLLISION
+  //PROJECTILE MINION COLLISION
   if (mageFlame.collides(blueMinion)) {
-    console.log("HIT!");
     blueMinion.death();
+    mageFlame.lifeCycle++;
+    if (mageFlame.lifeCycle >= 2) {
+      mageFlame.shooting = false;
+      mageFlame.xPos = 0;
+      mageFlame.lifeCycle = 0;
+    }
   }
 
   if (mageBullet.collides(blueMinion)) {
-    console.log("HIT!");
     blueMinion.death();
+    mageBullet.shooting = false;
+    mageBullet.xPos = 0;
   }
 
   //COLLISION EFFECTS

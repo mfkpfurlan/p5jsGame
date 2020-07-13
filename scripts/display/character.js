@@ -56,10 +56,9 @@ class Character extends Animate {
         this.evolution0 = true;
         this.evolution1 = false;
         this.evolving = true;
-
         setTimeout(() => {
             this.evolving = false;
-        }, 3000);
+        }, 2000);
     }
 
     evolve1() {
@@ -73,7 +72,7 @@ class Character extends Animate {
         this.yPos = height - this.ySize;
         this.evolution0 = false;
         this.evolution1 = true;
-        mage.isInvencible(800);
+        this.isInvencible(800);
         this.evolving = true;
         setTimeout(() => {
             this.evolving = false;
@@ -101,7 +100,7 @@ class Character extends Animate {
     }
 
     getsPower(powerup) {
-        if (this.invencible) {
+        if (this.evolving) {
             return false;
         }
         const precision = 1;
