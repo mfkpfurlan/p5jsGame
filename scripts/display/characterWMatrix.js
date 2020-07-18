@@ -1,9 +1,9 @@
-class Character extends Animate {
+class CharacterWMatrix extends AnimateWMatrix {
     constructor(
         spriteSheet,
         xSize, ySize,
         xSprite, ySprite,
-        xFrames, yFrames,
+        matrix,
         xPos, yPos,
         currentFrame, maxFrame
     ) {
@@ -11,7 +11,7 @@ class Character extends Animate {
             spriteSheet,
             xSize, ySize,
             xSprite, ySprite,
-            xFrames, yFrames,
+            matrix,
             xPos, yPos,
             currentFrame, maxFrame
         )
@@ -51,8 +51,6 @@ class Character extends Animate {
         this.ySize = 94;
         this.xSprite = 85;
         this.ySprite = 94;
-        this.xFrames = 4;
-        this.yFrames = 2;
         this.yPos = height - this.ySize;
         this.xPos = 20;
         this.yFloor = height - this.xSize - 20;
@@ -65,37 +63,38 @@ class Character extends Animate {
     }
 
     evolve1() {
-        this.spriteSheet = mageImg2;
-        this.xSize = 122;
-        this.ySize = 110;
-        this.xSprite = 122;
-        this.ySprite = 110;
-        this.xFrames = 4;
-        this.yFrames = 2;
-        this.xPos = 0;
-        this.yPos = height - this.ySize;
-        this.yFloor = height - 94 - 20;
-        this.evolution0 = false;
-        this.evolution1 = true;
-        this.isInvencible(800);
-        this.evolving = true;
-        setTimeout(() => {
-            this.evolving = false;
-        }, 2000);
+        // this.spriteSheet = mageImg2;
+        // this.xSize = 122;
+        // this.ySize = 110;
+        // this.xSprite = 122;
+        // this.ySprite = 110;
+        // this.xFrames = 4;
+        // this.yFrames = 2;
+        // this.xPos = 0;
+        // this.yPos = height - this.ySize;
+        // this.yFloor = height - 94 - 20;
+        // this.evolution0 = false;
+        // this.evolution1 = true;
+        // this.isInvencible(800);
+        // this.evolving = true;
+        // setTimeout(() => {
+        //     this.evolving = false;
+        // }, 2000);
+        return 0;
     }
 
-    evolve2() {
-        this.spriteSheet = mageImg3;
-        this.xSize = 87;
-        this.ySize = 110;
-        this.xSprite = 87;
-        this.ySprite = 110;
-        this.xFrames = 4;
-        this.yFrames = 2;
-        this.yPos = height - this.ySize;
-        this.evolution2 = true;
-        this.evolution1 = false;
-    }
+    // evolve2() {
+    //     this.spriteSheet = mageImg3;
+    //     this.xSize = 87;
+    //     this.ySize = 110;
+    //     this.xSprite = 87;
+    //     this.ySprite = 110;
+    //     this.xFrames = 4;
+    //     this.yFrames = 2;
+    //     this.yPos = height - this.ySize;
+    //     this.evolution2 = true;
+    //     this.evolution1 = false;
+    // }
 
     isInvencible(time) {
         this.invencible = true;

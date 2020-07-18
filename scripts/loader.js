@@ -17,4 +17,8 @@ function preload() {
     minionHitImg = loadImage('assets/effects/minion-hit.png');
 
     evolutionImg = loadImage('assets/effects/evolution-effect.png');
+
+    beheImg = loadImage('assets/monsters/minion2.png');
+    metalImg = loadImage('assets/monsters/minion3.png');
+    treeImg = loadImage('assets/monsters/minion4.png');
 }
